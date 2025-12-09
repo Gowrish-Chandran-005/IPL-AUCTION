@@ -79,10 +79,9 @@ io.on('connection', (socket) => {
 });
 
 // Start server
-httpServer.listen(PORT, '0.0.0.0', () => {
+httpServer.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📡 Socket.io ready for connections`);
-    console.log(`🌐 Network: http://192.168.1.4:${PORT}`);
 });
 
 export { app, io };
