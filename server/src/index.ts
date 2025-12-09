@@ -11,7 +11,7 @@ const app: Express = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.FRONTEND_URL || 'http://localhost:3002',
+        origin: '*', // Allow ANY frontend to connect
         methods: ['GET', 'POST']
     }
 });
