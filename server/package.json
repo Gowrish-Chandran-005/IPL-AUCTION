@@ -23,9 +23,7 @@
     "jsonwebtoken": "^9.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "socket.io": "^4.6.1"
-  },
-  "devDependencies": {
+    "socket.io": "^4.6.1",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.6",
     "@types/pg": "^8.10.9",
