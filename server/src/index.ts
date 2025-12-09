@@ -23,17 +23,17 @@ app.use(cors());
 app.use(express.json());
 
 // Import database connection
-// import './db';
+import './db';
 
 // Import routes
-// import authRoutes from './routes/auth';
-// import sessionRoutes from './routes/sessions';
-// import playerRoutes from './routes/players';
+import authRoutes from './routes/auth';
+import sessionRoutes from './routes/sessions';
+import playerRoutes from './routes/players';
 
 // Routes
-// app.use('/api/auth', authRoutes);
-// app.use('/api/sessions', sessionRoutes);
-// app.use('/api/players', playerRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/players', playerRoutes);
 
 // Root endpoint - API info
 app.get('/', (req: Request, res: Response) => {
