@@ -83,17 +83,21 @@ import seedPlayers from './seed';
 import { initDb } from './initDb';
 
 // Start server
+// Start server
 httpServer.listen(PORT, async () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📡 Socket.io ready for connections`);
+});
 
-    // Auto-initialize Database
+// Manual Init Endpoint (Emergency)
+app.get('/api/admin/init-db', async (req, res) => {
     try {
         await initDb();
         await seedPlayers();
-    } catch (error) {
-        console.error('❌ Database Initialization Failed:', error);
-        // Continue running, maybe DB will recover or it's a transient error
+        res.json({ message: 'Database Initialized Manually' });
+    } catch (error: any) {
+        console.error('Manual Init Failed:', error);
+        res.status(500).json({ error: error.message });
     }
 });
 
