@@ -84,8 +84,8 @@ import { initDb } from './initDb';
 
 // Start server
 // Start server
-httpServer.listen(PORT, async () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+httpServer.listen(parseInt(process.env.PORT || '5000'), '0.0.0.0', async () => {
+    console.log(`🚀 Server running on port ${process.env.PORT || 5000}`);
     console.log(`📡 Socket.io ready for connections`);
 });
 
