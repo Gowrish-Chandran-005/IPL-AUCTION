@@ -78,10 +78,23 @@ io.on('connection', (socket) => {
     });
 });
 
+// Import db logic
+import seedPlayers from './seed';
+import { initDb } from './initDb';
+
 // Start server
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, async () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📡 Socket.io ready for connections`);
+
+    // Auto-initialize Database
+    try {
+        await initDb();
+        await seedPlayers();
+    } catch (error) {
+        console.error('❌ Database Initialization Failed:', error);
+        // Continue running, maybe DB will recover or it's a transient error
+    }
 });
 
 export { app, io };
