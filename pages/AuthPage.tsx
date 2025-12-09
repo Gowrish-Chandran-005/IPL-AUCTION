@@ -12,6 +12,9 @@ export const AuthPage = () => {
 
     const { login, register } = useAuth();
 
+    // Debug info
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -24,7 +27,11 @@ export const AuthPage = () => {
                 await register(username, email, password);
             }
         } catch (err: any) {
-            setError(err.response?.data?.error || 'Authentication failed');
+            console.error('Auth Error:', err);
+            // Show detailed error message
+            const serverMsg = err.response?.data?.error;
+            const networkMsg = err.message;
+            setError(serverMsg || `Connection Failed: ${networkMsg}`);
         } finally {
             setLoading(false);
         }
@@ -83,7 +90,7 @@ export const AuthPage = () => {
                     </div>
 
                     {error && (
-                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm break-words">
                             {error}
                         </div>
                     )}
@@ -121,6 +128,13 @@ export const AuthPage = () => {
                             ? "Don't have an account? Register"
                             : 'Already have an account? Login'}
                     </button>
+
+                    {/* Debug Info Footer */}
+                    <div className="mt-8 pt-4 border-t border-slate-100">
+                        <p className="text-[10px] text-slate-400 font-mono">
+                            Backend: {apiUrl}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
